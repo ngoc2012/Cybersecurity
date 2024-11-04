@@ -32,7 +32,7 @@ test:
 	@echo "Running tests..."
 	@go test -v
 	@echo "Tests completed."
-run:
+run: $(MANDA)
 	@echo "Running spider program..."
 	@./spider -r -l 3 -p ./data http://example.com
 	@echo "Spider program completed."
