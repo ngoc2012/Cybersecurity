@@ -6,16 +6,17 @@
 #    By: minh-ngu <minh-ngu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/28 10:56:09 by minh-ngu          #+#    #+#              #
-#    Updated: 2024/11/04 10:33:45 by ngoc             ###   ########.fr        #
+#    Updated: 2024/11/04 10:34:51 by ngoc             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
+SRCS = *.go
 MANDA = spider
 DATA_DIR := ./data
 
 all:	$(MANDA)
 $(MANDA):
-	go build -o spider spider.go
+	make build
 clean:
 	@echo "Cleaning $(DATA_DIR) directory..."
 	@rm -rf $(DATA_DIR)/*
