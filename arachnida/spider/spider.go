@@ -45,6 +45,53 @@ func downloadImages(url string, recursive bool, depth int, path string) error {
 		return err
 	}
 	defer resp.Body.Close()
+package main
+
+import (
+	"flag"
+	"fmt"
+	"io"
+	"net/http"
+	"os"
+	"path/filepath"
+	"regexp"
+	"strings"
+
+	"golang.org/x/net/html"
+)
+
+// Default values
+const (
+	defaultDepth   = 5
+	defaultPath    = "./data/"
+	defaultExts    = ".jpg|.jpeg|.png|.gif|.bmp"
+)
+
+func main() {
+	recursive := flag.Bool("r", false, "Recursively download images")
+	depth := flag.Int("l", defaultDepth, "Maximum depth level of the recursive download")
+	path := flag.String("p", defaultPath, "Path where the downloaded files will be saved")
+
+	flag.Parse()
+
+	if len(flag.Args()) < 1 {
+		fmt.Println("Usage: ./spider [-rlp] URL")
+		return
+	}
+
+	url := flag.Args()[0]
+
+	if err := downloadImages(url, *recursive, *depth, *path); err != nil {
+		fmt.Println("Error:", err)
+	}
+}
+
+func downloadImages(url string, recursive bool, depth int, path string) error {
+	resp, err := http.Get(url)
+	if err != nil {
+		return err
+	}
+	defer resp.Body.Close()
 
 	if resp.StatusCode != http.StatusOK {
 		return fmt.Errorf("failed to fetch %s", url)
@@ -102,6 +149,11 @@ func saveImage(url, path string) error {
 
 	filename := filepath.Base(url)
 	filePath := filepath.Join(path, filename)
+
+	// Create the directory if it does not exist
+	if err := os.MkdirAll(path, 0755); err != nil {
+		return err
+	}
 
 	out, err := os.Create(filePath)
 	if err != nil {
