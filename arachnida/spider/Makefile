@@ -10,9 +10,11 @@
 #                                                                              #
 # **************************************************************************** #
 
-gitd:
-	git add -A -- :!*.o :!*.swp :!*.env :!*.crt :!*.key
-	git commit -m "$(M)"
-	git push
+MANDA = spider
 
+all:	$(MANDA)
+$(MANDA):
+	$(CC) $(FLAGS) $(OBJS) -o $(MANDA)
+test:
+	go test -v
 .PHONY: all clean fclean re
