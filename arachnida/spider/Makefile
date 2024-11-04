@@ -6,7 +6,7 @@
 #    By: minh-ngu <minh-ngu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/28 10:56:09 by minh-ngu          #+#    #+#              #
-#    Updated: 2024/11/04 10:39:12 by ngoc             ###   ########.fr        #
+#    Updated: 2024/11/04 10:41:16 by ngoc             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,8 +19,12 @@ $(MANDA): $(SRCS)
 	@make build
 clean:
 	@echo "Cleaning $(DATA_DIR) directory..."
+	@rm -f $(MANDA)
 	@rm -rf $(DATA_DIR)/*
 	@echo "Cleaned $(DATA_DIR) directory."
+fclean: clean
+	@rm -f $(MANDA)
+re: fclean all
 build:
 	@echo "Building spider program..."
 	@go build -o spider spider.go
