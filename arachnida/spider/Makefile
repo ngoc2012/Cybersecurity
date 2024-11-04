@@ -6,7 +6,7 @@
 #    By: minh-ngu <minh-ngu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/28 10:56:09 by minh-ngu          #+#    #+#              #
-#    Updated: 2024/11/04 10:41:16 by ngoc             ###   ########.fr        #
+#    Updated: 2024/11/04 10:42:22 by ngoc             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,8 +15,7 @@ MANDA = spider
 DATA_DIR := ./data
 
 all:	$(MANDA)
-$(MANDA): $(SRCS)
-	@make build
+$(MANDA): $(SRCS) build
 clean:
 	@echo "Cleaning $(DATA_DIR) directory..."
 	@rm -f $(MANDA)
