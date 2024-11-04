@@ -14,7 +14,9 @@ MANDA = spider
 
 all:	$(MANDA)
 $(MANDA):
-	$(CC) $(FLAGS) $(OBJS) -o $(MANDA)
+	go build -o spider spider.go
+example:
+	./spider -r -l 3 -p ./images http://example.com
 test:
 	go test -v
 .PHONY: all clean fclean re
