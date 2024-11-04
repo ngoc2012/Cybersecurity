@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"io"
 	"net/http"
+	"net/url"
 	"os"
 	"path/filepath"
 	"regexp"
@@ -121,8 +122,8 @@ func saveImage(url, path string) error {
 	return err
 }
 
-func getDomainName(url string) string {
-	u, err := url.Parse(url)
+func getDomainName(url_str string) string {
+	u, err := url.Parse(url_str)
 	if err != nil {
 		return ""
 	}
