@@ -55,6 +55,9 @@ func downloadImages(url string, recursive bool, depth int, path string) error {
 		return err
 	}
 
+	domain := getDomainName(url)
+	currentPath := filepath.Join(path, domain)
+
 	var f func(*html.Node)
 	f = func(n *html.Node) {
 		if n.Type == html.ElementNode && n.Data == "img" {
@@ -65,7 +68,7 @@ func downloadImages(url string, recursive bool, depth int, path string) error {
 						imgURL = url + imgURL
 					}
 					if match, _ := regexp.MatchString(defaultExts, imgURL); match {
-						if err := saveImage(imgURL, path); err != nil {
+						if err := saveImage(imgURL, currentPath); err != nil {
 							fmt.Println("Error saving image:", err)
 						}
 					}
@@ -116,4 +119,16 @@ func saveImage(url, path string) error {
 
 	_, err = io.Copy(out, resp.Body)
 	return err
+}
+
+func getDomainName(url string) string {
+	u, err := url.Parse(url)
+	if err != nil {
+		return ""
+	}
+	host := u.Host
+	if strings.HasPrefix(host, "www.") {
+		host = host[4:]
+	}
+	return host
 }
