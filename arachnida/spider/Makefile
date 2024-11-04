@@ -34,6 +34,7 @@ test:
 	@echo "Tests completed."
 run: $(MANDA)
 	@echo "Running spider program..."
-	@./spider -r -l 3 -p ./data http://example.com
+	@./spider -r -l 2 -p ./data https://vnexpress.net
+	# @./spider -r -l 3 -p ./data http://example.com
 	@echo "Spider program completed."
 .PHONY: all clean fclean re
