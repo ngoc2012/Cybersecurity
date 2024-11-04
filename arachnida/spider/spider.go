@@ -43,7 +43,7 @@ func main() {
 func downloadImages(url string, recursive bool, depth int, path string) error {
 	resp, err := http.Get(url)
 	if err != nil {
-		fmt.Println("failed to get %s", url)
+		fmt.Println("Failed to get %s", url)
 		return err
 	}
 	defer resp.Body.Close()
@@ -86,7 +86,7 @@ func downloadImages(url string, recursive bool, depth int, path string) error {
 					}
 					if err := downloadImages(link, recursive, depth-1, path); err != nil {
 						fmt.Println("Error downloading images from:", link, err)
-						fmt.Println("Details:", url, link)
+						fmt.Println("Details:", url, a.Val)
 					}
 				}
 			}
